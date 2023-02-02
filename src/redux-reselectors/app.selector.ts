@@ -1,6 +1,8 @@
 import {createSelector} from 'reselect';
-import {AppReducer} from '~defined-types/app.type';
+import {RootReducer} from '~defined-types/redux.type';
 
-const getAppReducer = (state: AppReducer) => state;
+const getAppReducer = (state: RootReducer) => state.appReducer;
 
-export const getAppTheme = createSelector(getAppReducer, r => r.theme);
+export const getAppTheme = createSelector(getAppReducer, r => {
+  return r.theme;
+});

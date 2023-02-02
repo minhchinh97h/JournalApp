@@ -13,6 +13,7 @@ const appReducer = produce((draft, action: AppReduxAction) => {
   switch (type) {
     case UPDATE_APP_THEME:
       draft.theme = payload as AppTheme;
+      break;
   }
 }, INITIAL_STATE);
 
