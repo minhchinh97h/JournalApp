@@ -1,0 +1,7 @@
+export const APP_TEXT_FONT_SIZE_LIST = {
+    H1_FONT_SIZE : 28,
+    H2_FONT_SIZE : 24,
+    H3_FONT_SIZE : 20,
+    NORMAL_FONT_SIZE : 16,
+    SMALL_FONT_SIZE : 14,
+}
