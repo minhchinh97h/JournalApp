@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import {StyleProp, Text, TextStyle} from 'react-native';
+import {Text, TextStyle} from 'react-native';
+import {APP_TEXT_FONT_SIZE_LIST} from '~constants/styles';
 
 export enum TextType {
   H1 = 'H1',
@@ -15,31 +16,69 @@ interface Props {
   type?: TextType;
 }
 
+const TYPE_STYLE: {
+  [x: string]: TextStyle;
+} = {
+  [TextType.H1]: {
+    color: '#EBEBEB',
+    fontSize: APP_TEXT_FONT_SIZE_LIST.H1_FONT_SIZE,
+    fontWeight: 'bold',
+  },
+  [TextType.H2]: {
+    color: '#EBEBEB',
+    fontSize: APP_TEXT_FONT_SIZE_LIST.H2_FONT_SIZE,
+    fontWeight: 'bold',
+  },
+  [TextType.H3]: {
+    color: '#EBEBEB',
+    fontSize: APP_TEXT_FONT_SIZE_LIST.H3_FONT_SIZE,
+    fontWeight: 'bold',
+  },
+  [TextType.NORMAL]: {
+    color: '#EBEBEB',
+    fontSize: APP_TEXT_FONT_SIZE_LIST.NORMAL_FONT_SIZE,
+  },
+  [TextType.SMALL]: {
+    color: '#EBEBEB',
+    fontSize: APP_TEXT_FONT_SIZE_LIST.SMALL_FONT_SIZE,
+  },
+};
+
 const AppText = (props: Props) => {
   const {fontSize, color, type} = props;
-  const [definedStyle, setDefinedStyle] = useState<StyleProp<TextStyle>>({
-    color: '#EBEBEB',
-    fontSize: 16,
-  });
+  const [definedStyle, setDefinedStyle] = useState<TextStyle>();
   useEffect(() => {
+    let bufferStyle: TextStyle = {};
+
     switch (type) {
       case TextType.H1:
-        setDefinedStyle({color: '#EBEBEB', fontSize: 28, fontWeight: 'bold'});
+        bufferStyle = TYPE_STYLE.H1;
         break;
       case TextType.H2:
-        setDefinedStyle({color: '#EBEBEB', fontSize: 24, fontWeight: 'bold'});
+        bufferStyle = TYPE_STYLE.H2;
         break;
       case TextType.H3:
-        setDefinedStyle({color: '#EBEBEB', fontSize: 20, fontWeight: 'bold'});
+        bufferStyle = TYPE_STYLE.H3;
         break;
       case TextType.NORMAL:
-        setDefinedStyle({color: '#EBEBEB', fontSize: 16});
+        bufferStyle = TYPE_STYLE.NORMAL;
         break;
       case TextType.SMALL:
-        setDefinedStyle({color: '#EBEBEB', fontSize: 14});
+        bufferStyle = TYPE_STYLE.SMALL;
+        break;
+      default:
+        bufferStyle = TYPE_STYLE.NORMAL;
         break;
     }
-  }, [type]);
+    if (fontSize) {
+      bufferStyle.fontSize = fontSize;
+    }
+    if (color) {
+      bufferStyle.color = color;
+    }
+
+    setDefinedStyle(bufferStyle);
+  }, [type, fontSize, color]);
 
   return <Text style={definedStyle}>Helu</Text>;
 };
