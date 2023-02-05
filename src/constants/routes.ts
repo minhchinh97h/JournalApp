@@ -1,0 +1,10 @@
+const ROUTE_LIST = {
+  HOME: 'HOME',
+  MAIN: 'MAIN',
+  JOURNAL: 'JOURNAL',
+  DISCOVER: 'DISCOVER',
+  STATS: 'STATS',
+  SETTINGS: 'SETTINGS',
+};
+
+export default ROUTE_LIST;
