@@ -5,3 +5,11 @@ export const APP_TEXT_FONT_SIZE_LIST = {
     NORMAL_FONT_SIZE : 16,
     SMALL_FONT_SIZE : 14,
 }
+
+export const APP_TEXT_COLOR_LIST = {
+    H1_COLOR: '#32828D',
+    H2_COLOR: '#EBEBEB',
+    H3_COLOR: '#3994A0',
+    NORMAL_COLOR: '#EBEBEB',
+    SMALL_COLOR: '#EBEBEB'
+}
