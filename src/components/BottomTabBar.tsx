@@ -4,6 +4,7 @@ import {useCallback} from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import ROUTE_LIST from '~constants/routes';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 const BottomTabBar = (props: BottomTabBarProps) => {
   const insets = useSafeAreaInsets();
@@ -61,6 +62,8 @@ const BottomTabBar = (props: BottomTabBarProps) => {
       <TouchableOpacity onPress={goToSettingsScreen}>
         <Text>Settings</Text>
       </TouchableOpacity>
+
+      <AntDesign name="stepforward" />
     </View>
   );
 };
