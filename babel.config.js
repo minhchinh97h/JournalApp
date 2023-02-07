@@ -8,6 +8,8 @@ module.exports = {
         extensions: ['.ios.js', '.android.js', '.js', '.ts', '.tsx', '.json'],
         alias: {
           '~components': './src/components',
+          '~screens': './src/screens',
+          '~helpers': './src/helpers',
           '~constants': './src/constants',
           '~redux-reducers': './src/redux-reducers',
           '~redux-store': './src/redux-store',
