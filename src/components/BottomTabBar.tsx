@@ -1,30 +1,41 @@
 import {BottomTabBarProps} from '@react-navigation/bottom-tabs';
-import React from 'react';
+import React, {useState} from 'react';
 import {useCallback} from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import ROUTE_LIST from '~constants/routes';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import {LIGHT_COLOR} from '~constants/styles';
+import {LIGHT_COLORS} from '~constants/styles';
 
 const BottomTabBar = (props: BottomTabBarProps) => {
-  const insets = useSafeAreaInsets();
   const {navigation} = props;
+
+  const insets = useSafeAreaInsets();
+
+  const [screen, setScreen] = useState(ROUTE_LIST.JOURNAL);
 
   const onGoToJournalScreen = useCallback(() => {
     navigation.navigate(ROUTE_LIST.JOURNAL);
+
+    setScreen(ROUTE_LIST.JOURNAL);
   }, [navigation]);
 
   const onGoToDiscoverScreen = useCallback(() => {
     navigation.navigate(ROUTE_LIST.DISCOVER);
+
+    setScreen(ROUTE_LIST.DISCOVER);
   }, [navigation]);
 
   const onGoToStatsScreen = useCallback(() => {
     navigation.navigate(ROUTE_LIST.STATS);
+
+    setScreen(ROUTE_LIST.STATS);
   }, [navigation]);
 
   const onGoToSettingsScreen = useCallback(() => {
     navigation.navigate(ROUTE_LIST.SETTINGS);
+
+    setScreen(ROUTE_LIST.SETTINGS);
   }, [navigation]);
 
   const onCreateNewJournalEntry = useCallback(() => {}, []);
@@ -37,13 +48,29 @@ const BottomTabBar = (props: BottomTabBarProps) => {
       <TouchableOpacity
         style={styles.screenButton}
         onPress={onGoToJournalScreen}>
-        <MaterialIcons name={'my-library-books'} size={32} color={'#61BECB'} />
+        <MaterialIcons
+          name={'my-library-books'}
+          size={32}
+          color={
+            screen === ROUTE_LIST.JOURNAL
+              ? LIGHT_COLORS.BLUE_GREEN
+              : LIGHT_COLORS.GRAY
+          }
+        />
       </TouchableOpacity>
 
       <TouchableOpacity
         style={styles.screenButton}
         onPress={onGoToDiscoverScreen}>
-        <MaterialIcons name={'museum'} size={32} color={'#61BECB'} />
+        <MaterialIcons
+          name={'museum'}
+          size={32}
+          color={
+            screen === ROUTE_LIST.DISCOVER
+              ? LIGHT_COLORS.BLUE_GREEN
+              : LIGHT_COLORS.GRAY
+          }
+        />
       </TouchableOpacity>
 
       <View style={styles.entryButtonContainer}>
@@ -55,13 +82,29 @@ const BottomTabBar = (props: BottomTabBarProps) => {
       </View>
 
       <TouchableOpacity style={styles.screenButton} onPress={onGoToStatsScreen}>
-        <MaterialIcons name={'bar-chart'} size={32} color={'#61BECB'} />
+        <MaterialIcons
+          name={'bar-chart'}
+          size={32}
+          color={
+            screen === ROUTE_LIST.STATS
+              ? LIGHT_COLORS.BLUE_GREEN
+              : LIGHT_COLORS.GRAY
+          }
+        />
       </TouchableOpacity>
 
       <TouchableOpacity
         style={styles.screenButton}
         onPress={onGoToSettingsScreen}>
-        <MaterialIcons name={'settings'} size={32} color={'#61BECB'} />
+        <MaterialIcons
+          name={'settings'}
+          size={32}
+          color={
+            screen === ROUTE_LIST.SETTINGS
+              ? LIGHT_COLORS.BLUE_GREEN
+              : LIGHT_COLORS.GRAY
+          }
+        />
       </TouchableOpacity>
     </View>
   );
@@ -102,7 +145,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: LIGHT_COLOR.BLUE_GREEN,
+    backgroundColor: LIGHT_COLORS.BLUE_GREEN,
     shadowOffset: {
       width: 3,
       height: 3,
