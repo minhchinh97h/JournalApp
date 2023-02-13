@@ -9,4 +9,6 @@ export const APP_TEXT_FONT_SIZE_LIST = {
 export const LIGHT_COLORS = {
   BLUE_GREEN: '#61BECB',
   GRAY: '#D9D9D9',
+  BLACK: '#000000',
+  WHITE: '#FFFFFF',
 };

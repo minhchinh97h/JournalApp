@@ -6,6 +6,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import ROUTE_LIST from '~constants/routes';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {LIGHT_COLORS} from '~constants/styles';
+import BottomTabBarButton from './BottomTabBar.Button';
 
 const BottomTabBar = (props: BottomTabBarProps) => {
   const {navigation} = props;
@@ -45,67 +46,73 @@ const BottomTabBar = (props: BottomTabBarProps) => {
       style={StyleSheet.compose(styles.container, {
         paddingBottom: insets.bottom,
       })}>
-      <TouchableOpacity
-        style={styles.screenButton}
-        onPress={onGoToJournalScreen}>
-        <MaterialIcons
-          name={'my-library-books'}
-          size={32}
-          color={
-            screen === ROUTE_LIST.JOURNAL
-              ? LIGHT_COLORS.BLUE_GREEN
-              : LIGHT_COLORS.GRAY
-          }
-        />
-      </TouchableOpacity>
+      <BottomTabBarButton
+        icon={
+          <MaterialIcons
+            name={'my-library-books'}
+            size={32}
+            color={
+              screen === ROUTE_LIST.JOURNAL
+                ? LIGHT_COLORS.BLUE_GREEN
+                : LIGHT_COLORS.GRAY
+            }
+          />
+        }
+        onPress={onGoToJournalScreen}
+      />
 
-      <TouchableOpacity
-        style={styles.screenButton}
-        onPress={onGoToDiscoverScreen}>
-        <MaterialIcons
-          name={'museum'}
-          size={32}
-          color={
-            screen === ROUTE_LIST.DISCOVER
-              ? LIGHT_COLORS.BLUE_GREEN
-              : LIGHT_COLORS.GRAY
-          }
-        />
-      </TouchableOpacity>
+      <BottomTabBarButton
+        icon={
+          <MaterialIcons
+            name={'museum'}
+            size={32}
+            color={
+              screen === ROUTE_LIST.DISCOVER
+                ? LIGHT_COLORS.BLUE_GREEN
+                : LIGHT_COLORS.GRAY
+            }
+          />
+        }
+        onPress={onGoToDiscoverScreen}
+      />
 
       <View style={styles.entryButtonContainer}>
         <TouchableOpacity
           style={styles.entryButton}
           onPress={onCreateNewJournalEntry}>
-          <MaterialIcons name={'add'} size={32} color={'#FFFFFF'} />
+          <MaterialIcons name={'add'} size={32} color={LIGHT_COLORS.WHITE} />
         </TouchableOpacity>
       </View>
 
-      <TouchableOpacity style={styles.screenButton} onPress={onGoToStatsScreen}>
-        <MaterialIcons
-          name={'bar-chart'}
-          size={32}
-          color={
-            screen === ROUTE_LIST.STATS
-              ? LIGHT_COLORS.BLUE_GREEN
-              : LIGHT_COLORS.GRAY
-          }
-        />
-      </TouchableOpacity>
+      <BottomTabBarButton
+        icon={
+          <MaterialIcons
+            name={'bar-chart'}
+            size={32}
+            color={
+              screen === ROUTE_LIST.STATS
+                ? LIGHT_COLORS.BLUE_GREEN
+                : LIGHT_COLORS.GRAY
+            }
+          />
+        }
+        onPress={onGoToStatsScreen}
+      />
 
-      <TouchableOpacity
-        style={styles.screenButton}
-        onPress={onGoToSettingsScreen}>
-        <MaterialIcons
-          name={'settings'}
-          size={32}
-          color={
-            screen === ROUTE_LIST.SETTINGS
-              ? LIGHT_COLORS.BLUE_GREEN
-              : LIGHT_COLORS.GRAY
-          }
-        />
-      </TouchableOpacity>
+      <BottomTabBarButton
+        icon={
+          <MaterialIcons
+            name={'settings'}
+            size={32}
+            color={
+              screen === ROUTE_LIST.SETTINGS
+                ? LIGHT_COLORS.BLUE_GREEN
+                : LIGHT_COLORS.GRAY
+            }
+          />
+        }
+        onPress={onGoToSettingsScreen}
+      />
     </View>
   );
 };
@@ -122,20 +129,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingHorizontal: 32,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: LIGHT_COLORS.WHITE,
     shadowOffset: {
       width: -1,
       height: 5,
     },
     shadowRadius: 19,
-    shadowColor: 'rgba(0, 0, 0, 0.25)',
-    shadowOpacity: 1,
-  },
-  screenButton: {
-    width: 48,
-    height: 40,
-    justifyContent: 'center',
-    alignItems: 'center',
+    shadowColor: LIGHT_COLORS.BLACK,
+    shadowOpacity: 0.25,
   },
   entryButtonContainer: {position: 'relative', width: 60, height: 60},
   entryButton: {
@@ -151,7 +152,7 @@ const styles = StyleSheet.create({
       height: 3,
     },
     shadowOpacity: 0.25,
-    shadowColor: '#000000',
+    shadowColor: LIGHT_COLORS.BLACK,
     top: -14,
   },
 });
