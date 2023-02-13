@@ -33,7 +33,8 @@ const AppCard = (props: Props) => {
   return (
     <View style={styles.cardStyle}>
       <View style={{flexDirection: 'column'}}>
-        <AppText content={title} type={TextType.H1} />
+        {title && <AppText content={title} type={TextType.H1} />}
+
         <AppText content={content} type={TextType.NORMAL} />
       </View>
     </View>
