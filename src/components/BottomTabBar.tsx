@@ -39,7 +39,9 @@ const BottomTabBar = (props: BottomTabBarProps) => {
     setScreen(ROUTE_LIST.SETTINGS);
   }, [navigation]);
 
-  const onCreateNewJournalEntry = useCallback(() => {}, []);
+  const onGoToJournalEntryScreen = useCallback(() => {
+    navigation.navigate(ROUTE_LIST.JOURNAL_ENTRY);
+  }, [navigation]);
 
   return (
     <View
@@ -79,7 +81,7 @@ const BottomTabBar = (props: BottomTabBarProps) => {
       <View style={styles.entryButtonContainer}>
         <TouchableOpacity
           style={styles.entryButton}
-          onPress={onCreateNewJournalEntry}>
+          onPress={onGoToJournalEntryScreen}>
           <MaterialIcons name={'add'} size={32} color={LIGHT_COLORS.WHITE} />
         </TouchableOpacity>
       </View>

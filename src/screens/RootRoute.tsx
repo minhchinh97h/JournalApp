@@ -13,6 +13,7 @@ import SettingsScreen from './SettingsScreen';
 import StatsScreen from './StatsScreen';
 import BottomTabBar from '~components/BottomTabBar';
 import {useCallback} from 'react';
+import JournalEntryScreen from './JournalEntryScreen';
 
 const BottomTab = createBottomTabNavigator();
 
@@ -48,6 +49,10 @@ const RootRoute = () => {
         }}>
         <Stack.Screen name={ROUTE_LIST.HOME} component={HomeScreen} />
         <Stack.Screen name={ROUTE_LIST.MAIN} component={BottomTabNavigator} />
+        <Stack.Screen
+          name={ROUTE_LIST.JOURNAL_ENTRY}
+          component={JournalEntryScreen}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
