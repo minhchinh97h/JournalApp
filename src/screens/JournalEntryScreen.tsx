@@ -1,14 +1,22 @@
 import React from 'react';
-import {SafeAreaView, View} from 'react-native';
+import {SafeAreaView, StyleSheet} from 'react-native';
 import Header from '~components/Header';
+import JournalEntry from '~components/JournalEntry';
 
 const JournalEntryScreen = () => {
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.container}>
       <Header title="Entry" />
-      <View style={{width: '100%', flex: 1}}></View>
+
+      <JournalEntry />
     </SafeAreaView>
   );
 };
 
 export default React.memo(JournalEntryScreen);
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
