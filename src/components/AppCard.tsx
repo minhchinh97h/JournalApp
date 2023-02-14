@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {ReactNode} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import AppText, {TextType} from './AppText';
 
 interface Props {
+  children?: ReactNode;
   height?: number;
   color?: string;
   title?: string;
@@ -27,15 +28,13 @@ const styles = StyleSheet.create({
   },
 });
 
-const AppCard = (props: Props) => {
-  const {height, color, title, content} = props;
-
+const AppCard = ({children}: Props) => {
   return (
     <View style={styles.cardStyle}>
       <View style={{flexDirection: 'column'}}>
-        {title && <AppText content={title} type={TextType.H1} />}
-
-        <AppText content={content} type={TextType.NORMAL} />
+        {/* {title && <AppText content={title} type={TextType.H1} />} */}
+        {/* <AppText content={content} type={TextType.NORMAL} /> */}
+        {children}
       </View>
     </View>
   );
