@@ -23,6 +23,7 @@ const BottomTabNavigator = () => {
 
   return (
     <BottomTab.Navigator
+      initialRouteName={ROUTE_LIST.JOURNAL}
       tabBar={tabBar}
       screenOptions={{
         headerShown: false,

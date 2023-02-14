@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Text, TextStyle} from 'react-native';
-import {APP_TEXT_COLOR_LIST, APP_TEXT_FONT_SIZE_LIST} from '~constants/styles';
+import {APP_TEXT_FONT_SIZE_LIST} from '~constants/styles';
 
 export enum TextType {
   H1 = 'H1',
@@ -14,39 +14,38 @@ interface Props {
   fontSize?: number;
   color?: string;
   type?: TextType;
-  content?: string;
 }
 
 const TYPE_STYLE: {
   [x: string]: TextStyle;
 } = {
   [TextType.H1]: {
-    color: APP_TEXT_COLOR_LIST.H1_COLOR,
+    color: '#EBEBEB',
     fontSize: APP_TEXT_FONT_SIZE_LIST.H1_FONT_SIZE,
     fontWeight: 'bold',
   },
   [TextType.H2]: {
-    color: APP_TEXT_COLOR_LIST.H2_COLOR,
+    color: '#EBEBEB',
     fontSize: APP_TEXT_FONT_SIZE_LIST.H2_FONT_SIZE,
     fontWeight: 'bold',
   },
   [TextType.H3]: {
-    color: APP_TEXT_COLOR_LIST.H3_COLOR,
+    color: '#EBEBEB',
     fontSize: APP_TEXT_FONT_SIZE_LIST.H3_FONT_SIZE,
     fontWeight: 'bold',
   },
   [TextType.NORMAL]: {
-    color: APP_TEXT_COLOR_LIST.NORMAL_COLOR,
+    color: '#EBEBEB',
     fontSize: APP_TEXT_FONT_SIZE_LIST.NORMAL_FONT_SIZE,
   },
   [TextType.SMALL]: {
-    color: APP_TEXT_COLOR_LIST.SMALL_COLOR,
+    color: '#EBEBEB',
     fontSize: APP_TEXT_FONT_SIZE_LIST.SMALL_FONT_SIZE,
   },
 };
 
 const AppText = (props: Props) => {
-  const {fontSize, color, type, content} = props;
+  const {fontSize, color, type} = props;
   const [definedStyle, setDefinedStyle] = useState<TextStyle>();
   useEffect(() => {
     let bufferStyle: TextStyle = {};
@@ -81,7 +80,7 @@ const AppText = (props: Props) => {
     setDefinedStyle(bufferStyle);
   }, [type, fontSize, color]);
 
-  return <Text style={definedStyle}>{content}</Text>;
+  return <Text style={definedStyle}>Helu</Text>;
 };
 
 export default AppText;
