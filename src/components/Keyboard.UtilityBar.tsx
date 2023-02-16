@@ -81,6 +81,10 @@ const KeyboardUtilityBar = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const onSelectHeadingSize = useCallback(() => {}, []);
+
+  const onSelectNormalTextSize = useCallback(() => {}, []);
+
   const onSelectImportImage = useCallback(() => {}, []);
 
   useEffect(() => {
@@ -119,13 +123,15 @@ const KeyboardUtilityBar = () => {
 
           <View style={styles.horizontalSpacer} />
 
-          <TouchableOpacity style={styles.button} onPress={onSelectFormat}>
+          <TouchableOpacity style={styles.button} onPress={onSelectHeadingSize}>
             <Text>Heading</Text>
           </TouchableOpacity>
 
           <View style={styles.horizontalSpacer} />
 
-          <TouchableOpacity style={styles.button} onPress={onSelectFormat}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={onSelectNormalTextSize}>
             <Text>Text</Text>
           </TouchableOpacity>
         </Animated.View>
