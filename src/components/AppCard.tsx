@@ -13,10 +13,8 @@ interface Props {
 
 const styles = StyleSheet.create({
   cardStyle: {
-    height: 90,
     width: '85%',
-    paddingTop: 20,
-    paddingLeft: 20,
+    padding: 16,
     backgroundColor: '#61BECB',
     shadowColor: '#000000',
     shadowOffset: {width: 0, height: 4},
@@ -25,17 +23,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     borderRadius: 30,
+    margin: 16,
   },
 });
 
 const AppCard = ({children}: Props) => {
   return (
     <View style={styles.cardStyle}>
-      <View style={{flexDirection: 'column'}}>
-        {/* {title && <AppText content={title} type={TextType.H1} />} */}
-        {/* <AppText content={content} type={TextType.NORMAL} /> */}
-        {children}
-      </View>
+      <View style={{flexDirection: 'column', flex: 1}}>{children}</View>
     </View>
   );
 };

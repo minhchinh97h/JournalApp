@@ -14,6 +14,7 @@ interface Props {
   fontSize?: number;
   color?: string;
   type?: TextType;
+  content?: string;
 }
 
 const TYPE_STYLE: {
@@ -45,7 +46,7 @@ const TYPE_STYLE: {
 };
 
 const AppText = (props: Props) => {
-  const {fontSize, color, type} = props;
+  const {fontSize, color, type, content} = props;
   const [definedStyle, setDefinedStyle] = useState<TextStyle>();
   useEffect(() => {
     let bufferStyle: TextStyle = {};
@@ -80,7 +81,7 @@ const AppText = (props: Props) => {
     setDefinedStyle(bufferStyle);
   }, [type, fontSize, color]);
 
-  return <Text style={definedStyle}>Helu</Text>;
+  return <Text style={definedStyle}>{content}</Text>;
 };
 
 export default AppText;
