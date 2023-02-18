@@ -16,8 +16,15 @@ import Animated, {
   interpolate,
   Extrapolation,
 } from 'react-native-reanimated';
+import {useDispatch, useSelector} from 'react-redux';
 import {WINDOW_WIDTH} from '~constants/dimensions';
 import {LIGHT_COLORS} from '~constants/styles';
+import {TextSize} from '~defined-types/text-formatting.type';
+import {updateTextFormattingSelectedTextSize} from '~redux-actions/text-formatting.action';
+import {
+  getTextFormattingContent,
+  getTextFormattingSelectedTextSize,
+} from '~redux-reselectors/text-formatting.selector';
 
 const HEIGHT = 32;
 
@@ -27,6 +34,14 @@ const ANIMATION_CONFIG: WithTimingConfig = {
 };
 
 const KeyboardUtilityBar = () => {
+  const dispatch = useDispatch();
+
+  const textFormattingContent = useSelector(getTextFormattingContent);
+
+  const textFormattingSelectedTextSize = useSelector(
+    getTextFormattingSelectedTextSize,
+  );
+
   const containerTranslateYSharedValue = useSharedValue(0);
 
   const subToolContainerTranslateXSharedValue = useSharedValue(WINDOW_WIDTH);
@@ -81,9 +96,13 @@ const KeyboardUtilityBar = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const onSelectHeadingSize = useCallback(() => {}, []);
-
-  const onSelectNormalTextSize = useCallback(() => {}, []);
+  const onToggleHeadingSize = useCallback(() => {
+    if (textFormattingSelectedTextSize === TextSize.H1) {
+      dispatch(updateTextFormattingSelectedTextSize(undefined));
+    } else {
+      dispatch(updateTextFormattingSelectedTextSize(TextSize.H1));
+    }
+  }, [dispatch, textFormattingSelectedTextSize]);
 
   const onSelectImportImage = useCallback(() => {}, []);
 
@@ -123,17 +142,29 @@ const KeyboardUtilityBar = () => {
 
           <View style={styles.horizontalSpacer} />
 
-          <TouchableOpacity style={styles.button} onPress={onSelectHeadingSize}>
-            <Text>Heading</Text>
+          <TouchableOpacity
+            style={StyleSheet.compose(styles.button, {
+              backgroundColor:
+                textFormattingSelectedTextSize === TextSize.H1
+                  ? LIGHT_COLORS.BLACK
+                  : undefined,
+            })}
+            onPress={onToggleHeadingSize}>
+            <Text
+              style={StyleSheet.compose(
+                {},
+                {
+                  color:
+                    textFormattingSelectedTextSize === TextSize.H1
+                      ? LIGHT_COLORS.WHITE
+                      : undefined,
+                },
+              )}>
+              Heading
+            </Text>
           </TouchableOpacity>
 
           <View style={styles.horizontalSpacer} />
-
-          <TouchableOpacity
-            style={styles.button}
-            onPress={onSelectNormalTextSize}>
-            <Text>Text</Text>
-          </TouchableOpacity>
         </Animated.View>
       </Animated.View>
     </KeyboardAvoidingView>
