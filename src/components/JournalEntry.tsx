@@ -13,7 +13,7 @@ const JournalEntry = () => {
 
       <View style={styles.verticalSpacer} />
 
-      <JournalEntrySection headingContent={'What you doing?'} />
+      {/* <JournalEntrySection headingContent={'What you doing?'} /> */}
     </ScrollView>
   );
 };

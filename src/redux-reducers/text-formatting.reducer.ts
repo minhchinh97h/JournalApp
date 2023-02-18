@@ -1,6 +1,7 @@
 import produce from 'immer';
 import {AppReduxAction} from '~defined-types/redux.type';
 import {
+  FormattedText,
   TextFormattingReducer,
   TextSelection,
   TextSize,
@@ -8,6 +9,7 @@ import {
 } from '~defined-types/text-formatting.type';
 import {
   UPDATE_TEXT_FORMATTING_CONTENT,
+  UPDATE_TEXT_FORMATTING_FORMATTED_ARRAY,
   UPDATE_TEXT_FORMATTING_SELECTED_TEXT_SIZE,
   UPDATE_TEXT_FORMATTING_SELECTED_TEXT_STYLES,
   UPDATE_TEXT_FORMATTING_SELECTION,
@@ -15,6 +17,7 @@ import {
 
 const INITIAL_STATE: TextFormattingReducer = {
   content: '',
+  formattedArray: [],
   selection: undefined,
   selectedTextSize: undefined,
   selectedTextStyles: [],
@@ -26,6 +29,10 @@ const textFormattingReducer = produce((draft, action: AppReduxAction) => {
   switch (type) {
     case UPDATE_TEXT_FORMATTING_CONTENT:
       draft.content = payload as string;
+      break;
+
+    case UPDATE_TEXT_FORMATTING_FORMATTED_ARRAY:
+      draft.formattedArray = payload as FormattedText[];
       break;
 
     case UPDATE_TEXT_FORMATTING_SELECTION:

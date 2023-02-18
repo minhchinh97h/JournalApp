@@ -4,12 +4,18 @@ import {
   StyleSheet,
   Text,
   TextInput,
+  TextInputChangeEventData,
   TextInputFocusEventData,
   TextInputSelectionChangeEventData,
   View,
 } from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import {TextSize} from '~defined-types/text-formatting.type';
+import {
+  FormattedCharacter,
+  FormattedText,
+  TextSelection,
+  TextSize,
+} from '~defined-types/text-formatting.type';
 import {
   updateTextFormattingContent,
   updateTextFormattingSelection,
@@ -25,6 +31,8 @@ interface Props {
 }
 
 const JournalEntrySection = (props: Props) => {
+  const {headingContent} = props;
+
   const dispatch = useDispatch();
 
   const textFormattingContent = useSelector(getTextFormattingContent);
@@ -35,20 +43,39 @@ const JournalEntrySection = (props: Props) => {
     getTextFormattingSelectedStyles,
   );
 
-  const {headingContent} = props;
+  const lastCharacterRef = useRef<string>('');
+  const formattedArrayRef = useRef<FormattedCharacter[]>([]);
+  const textSelectionRef = useRef<TextSelection>({
+    start: 0,
+    end: 0,
+  });
 
   const [textArray, setTextArray] = useState([
     <Text key={`text-at-${Date.now()}`}>{textFormattingContent}</Text>,
   ]);
 
-  const textSelectionRef = useRef<{start: number; end: number}>({
-    start: 0,
-    end: 0,
-  });
-
   const onChangeContent = useCallback(
     (value: string) => {
+      let targetIndex = 0;
+
+      // Deleting
+      if (textFormattingContent.length > value.length) {
+        targetIndex = textSelectionRef.current.start - 1;
+      }
+      // Adding
+      else {
+        targetIndex = textSelectionRef.current.start;
+      }
+
+      lastCharacterRef.current = value.substring(value.length - 1);
+
       dispatch(updateTextFormattingContent(value));
+
+      const formattedCharacter: FormattedCharacter = {
+        index: targetIndex,
+        size: textFormattingSelectedTextSize,
+        styles: textFormattingSelectedStyles,
+      };
     },
     [dispatch],
   );
@@ -57,13 +84,15 @@ const JournalEntrySection = (props: Props) => {
     (e: NativeSyntheticEvent<TextInputSelectionChangeEventData>) => {
       textSelectionRef.current = e.nativeEvent.selection;
 
-      //   dispatch(updateTextFormattingSelection(e.nativeEvent.selection));
+      dispatch(updateTextFormattingSelection(e.nativeEvent.selection));
     },
-    [],
+    [dispatch],
   );
 
   useEffect(() => {
-    console.log('textFormattingContent', textFormattingContent);
+    setTextArray([
+      <Text key={`text-at-${Date.now()}`}>{textFormattingContent}</Text>,
+    ]);
   }, [textFormattingContent]);
 
   return (
@@ -99,7 +128,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     padding: 0,
     margin: 0,
-    width: 100,
   },
 
   verticalSpacer: {

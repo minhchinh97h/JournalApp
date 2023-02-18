@@ -17,3 +17,5 @@ export interface AppReduxPersistConfig
   key?: string;
   storage?: Storage;
 }
+
+export type GetState = () => RootReducer;

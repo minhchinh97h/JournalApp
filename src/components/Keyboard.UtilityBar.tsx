@@ -19,11 +19,16 @@ import Animated, {
 import {useDispatch, useSelector} from 'react-redux';
 import {WINDOW_WIDTH} from '~constants/dimensions';
 import {LIGHT_COLORS} from '~constants/styles';
+import {TEXT_FORMATTING_TAG} from '~constants/text-formatting.constants';
 import {TextSize} from '~defined-types/text-formatting.type';
-import {updateTextFormattingSelectedTextSize} from '~redux-actions/text-formatting.action';
+import {
+  updateTextFormattingContent,
+  updateTextFormattingSelectedTextSize,
+} from '~redux-actions/text-formatting.action';
 import {
   getTextFormattingContent,
   getTextFormattingSelectedTextSize,
+  getTextFormattingSelection,
 } from '~redux-reselectors/text-formatting.selector';
 
 const HEIGHT = 32;
@@ -37,7 +42,7 @@ const KeyboardUtilityBar = () => {
   const dispatch = useDispatch();
 
   const textFormattingContent = useSelector(getTextFormattingContent);
-
+  const textFormattingSelection = useSelector(getTextFormattingSelection);
   const textFormattingSelectedTextSize = useSelector(
     getTextFormattingSelectedTextSize,
   );
@@ -97,12 +102,142 @@ const KeyboardUtilityBar = () => {
   }, []);
 
   const onToggleHeadingSize = useCallback(() => {
-    if (textFormattingSelectedTextSize === TextSize.H1) {
-      dispatch(updateTextFormattingSelectedTextSize(undefined));
-    } else {
-      dispatch(updateTextFormattingSelectedTextSize(TextSize.H1));
+    let content = textFormattingContent;
+
+    let start = 0,
+      end = 0;
+
+    if (textFormattingSelection) {
+      start = textFormattingSelection.start;
+      end = textFormattingSelection.end;
     }
-  }, [dispatch, textFormattingSelectedTextSize]);
+
+    if (content.length === 0) {
+      content += TEXT_FORMATTING_TAG.H1;
+    } else {
+      let foundTags: string[] = [];
+
+      let recursiveStart = start;
+
+      const recursivelyFindAdjacentTags = (start: number, tags: string[]) => {
+        let foundTag = false;
+
+        const possibleTag = content.substring(start, start - 4);
+
+        for (const tag in TEXT_FORMATTING_TAG) {
+          if (possibleTag === TEXT_FORMATTING_TAG[tag]) {
+            foundTag = true;
+
+            tags.push(TEXT_FORMATTING_TAG[tag]);
+
+            break;
+          }
+        }
+
+        if (foundTag === false) {
+          return;
+        }
+
+        start = start - 4;
+
+        recursivelyFindAdjacentTags(start, tags);
+      };
+
+      const recursivelyFindTags = (start: number, tags: string[]) => {
+        if (start < 4) {
+          return;
+        }
+
+        let foundTag = false;
+
+        const possibleTag = content.substring(start, start - 4);
+
+        for (const tag in TEXT_FORMATTING_TAG) {
+          if (possibleTag === TEXT_FORMATTING_TAG[tag]) {
+            foundTag = true;
+
+            tags.push(TEXT_FORMATTING_TAG[tag]);
+
+            break;
+          }
+        }
+
+        if (foundTag === false) {
+          start = start - 1;
+
+          recursivelyFindTags(start, tags);
+        } else {
+          start = start - 4;
+
+          recursivelyFindAdjacentTags(start, tags);
+        }
+      };
+
+      recursivelyFindTags(recursiveStart, foundTags);
+    }
+
+    dispatch(updateTextFormattingContent(content));
+  }, [dispatch, textFormattingContent, textFormattingSelection]);
+
+  const onToggleBold = useCallback(() => {
+    let content = textFormattingContent;
+
+    let start = 0,
+      end = 0;
+
+    if (textFormattingSelection) {
+      start = textFormattingSelection.start;
+      end = textFormattingSelection.end;
+    }
+
+    if (content.length === 0) {
+      content += TEXT_FORMATTING_TAG.BOLD;
+    } else {
+      for (let i = 0; i < start; i++) {}
+    }
+
+    dispatch(updateTextFormattingContent(content));
+  }, [dispatch, textFormattingContent, textFormattingSelection]);
+
+  const onToggleItalic = useCallback(() => {
+    let content = textFormattingContent;
+
+    let start = 0,
+      end = 0;
+
+    if (textFormattingSelection) {
+      start = textFormattingSelection.start;
+      end = textFormattingSelection.end;
+    }
+
+    if (content.length === 0) {
+      content += TEXT_FORMATTING_TAG.ITALIC;
+    } else {
+      for (let i = 0; i < start; i++) {}
+    }
+
+    dispatch(updateTextFormattingContent(content));
+  }, [dispatch, textFormattingContent, textFormattingSelection]);
+
+  const onToggleCrossed = useCallback(() => {
+    let content = textFormattingContent;
+
+    let start = 0,
+      end = 0;
+
+    if (textFormattingSelection) {
+      start = textFormattingSelection.start;
+      end = textFormattingSelection.end;
+    }
+
+    if (content.length === 0) {
+      content += TEXT_FORMATTING_TAG.CROSSED;
+    } else {
+      for (let i = 0; i < start; i++) {}
+    }
+
+    dispatch(updateTextFormattingContent(content));
+  }, [dispatch, textFormattingContent, textFormattingSelection]);
 
   const onSelectImportImage = useCallback(() => {}, []);
 
@@ -165,6 +300,28 @@ const KeyboardUtilityBar = () => {
           </TouchableOpacity>
 
           <View style={styles.horizontalSpacer} />
+
+          <TouchableOpacity
+            style={StyleSheet.compose(styles.button, {})}
+            onPress={onToggleBold}>
+            <Text>Bold</Text>
+          </TouchableOpacity>
+
+          <View style={styles.horizontalSpacer} />
+
+          <TouchableOpacity
+            style={StyleSheet.compose(styles.button, {})}
+            onPress={onToggleItalic}>
+            <Text>Italic</Text>
+          </TouchableOpacity>
+
+          <View style={styles.horizontalSpacer} />
+
+          <TouchableOpacity
+            style={StyleSheet.compose(styles.button, {})}
+            onPress={onToggleCrossed}>
+            <Text>Crossed</Text>
+          </TouchableOpacity>
         </Animated.View>
       </Animated.View>
     </KeyboardAvoidingView>

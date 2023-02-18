@@ -11,6 +11,13 @@ export const getTextFormattingContent = createSelector(
   },
 );
 
+export const getTextFormattingFormattedArray = createSelector(
+  getTextFormattingReducer,
+  r => {
+    return r.formattedArray;
+  },
+);
+
 export const getTextFormattingSelection = createSelector(
   getTextFormattingReducer,
   r => {

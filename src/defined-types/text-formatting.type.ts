@@ -1,5 +1,6 @@
 export interface TextFormattingReducer {
   content: string;
+  formattedArray: FormattedText[];
   selection: TextSelection | undefined;
   selectedTextSize: TextSize | undefined;
   selectedTextStyles: TextStyle[];
@@ -12,6 +13,7 @@ export interface TextSelection {
 
 export enum TextSize {
   H1 = 'H1',
+  NORMAL = 'NORMAL',
 }
 
 export enum TextStyle {
@@ -21,7 +23,14 @@ export enum TextStyle {
 }
 
 export interface FormattedText {
-  content: string;
+  end: number;
+  size?: TextSize;
+  styles?: TextStyle[];
+  image?: unknown;
+}
+
+export interface FormattedCharacter {
+  index: number;
   size?: TextSize;
   styles?: TextStyle[];
   image?: unknown;
