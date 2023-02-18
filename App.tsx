@@ -6,10 +6,15 @@
  */
 
 import React from 'react';
+import {SafeAreaView, View} from 'react-native';
 import RootRoute from '~screens/RootRoute';
 
 const App = () => {
-  return <RootRoute />;
+  return (
+    <SafeAreaView style={{flex: 1}}>
+      <RootRoute />
+    </SafeAreaView>
+  );
 };
 
 export default App;
