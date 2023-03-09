@@ -421,6 +421,8 @@ PODS:
     - React-perflogger (= 0.71.2)
   - RNCAsyncStorage (1.17.11):
     - React-Core
+  - RNCClipboard (1.11.1):
+    - React-Core
   - RNReanimated (2.14.4):
     - DoubleConversion
     - FBLazyVector
@@ -521,6 +523,7 @@ DEPENDENCIES:
   - React-runtimeexecutor (from `../node_modules/react-native/ReactCommon/runtimeexecutor`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
+  - "RNCClipboard (from `../node_modules/@react-native-clipboard/clipboard`)"
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNSVG (from `../node_modules/react-native-svg`)
@@ -616,6 +619,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   RNCAsyncStorage:
     :path: "../node_modules/@react-native-async-storage/async-storage"
+  RNCClipboard:
+    :path: "../node_modules/@react-native-clipboard/clipboard"
   RNReanimated:
     :path: "../node_modules/react-native-reanimated"
   RNScreens:
@@ -676,6 +681,7 @@ SPEC CHECKSUMS:
   React-runtimeexecutor: 4bf9a9086d27f74065fce1dddac274aa95216952
   ReactCommon: f697c0ac52e999aa818e43e2b6f277787c735e2d
   RNCAsyncStorage: 8616bd5a58af409453ea4e1b246521bb76578d60
+  RNCClipboard: 2834e1c4af68697089cdd455ee4a4cdd198fa7dd
   RNReanimated: cc5e3aa479cb9170bcccf8204291a6950a3be128
   RNScreens: ea4cd3a853063cda19a4e3c28d2e52180c80f4eb
   RNSVG: c1e76b81c76cdcd34b4e1188852892dc280eb902

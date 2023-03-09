@@ -30,7 +30,7 @@ export interface FormattedText {
 }
 
 export interface FormattedCharacter {
-  index: number;
+  character: string;
   size?: TextSize;
   styles?: TextStyle[];
   image?: unknown;
