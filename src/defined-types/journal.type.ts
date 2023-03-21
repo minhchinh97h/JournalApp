@@ -1,3 +1,7 @@
+export interface JournalReducer{
+    entries: JournalEntry[]
+}
+
 enum EntryType{
     SHORT = 'short',
     LONG = 'long'

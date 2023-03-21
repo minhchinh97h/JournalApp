@@ -21,6 +21,7 @@ const makePersisted = (
 
 const rootReducer = combineReducers<RootReducer>({
   appReducer: makePersisted({}, appReducer),
+  // someReducer: someReducer to not make it persist
 });
 
 export default rootReducer;
