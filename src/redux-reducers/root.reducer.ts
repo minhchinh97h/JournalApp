@@ -3,6 +3,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {PersistConfig, persistReducer} from 'redux-persist';
 import {AppReduxPersistConfig, RootReducer} from '~defined-types/redux.type';
 import appReducer from './app.reducer';
+import journalReducer from './journal.reducer';
 
 const persistConfig: PersistConfig<unknown> = {
   key: 'root',
@@ -21,6 +22,7 @@ const makePersisted = (
 
 const rootReducer = combineReducers<RootReducer>({
   appReducer: makePersisted({}, appReducer),
+  journalReducer: journalReducer,
   // someReducer: someReducer to not make it persist
 });
 
