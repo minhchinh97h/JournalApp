@@ -18,7 +18,7 @@ const JournalScreen = () => {
         <PromptCard
           content={"What I'm most excited about today ____"}></PromptCard>
         {JournalEntries.map((item, index) => (
-          <QuoteCard key={index} content={item.text} author={'Archilochus'} />
+          <QuoteCard key={index} content={item.text} author={'Archilochus1'} />
         ))}
       </View>
     </SafeAreaView>

@@ -46,8 +46,12 @@ const BottomTabBar = (props: BottomTabBarProps) => {
   const onCreateNewJournalEntry = useCallback(() => {
     console.log('onCreateNewJournalEntry');
 
+    const randomNumber = Math.random();
+    const currentTime = new Date().getTime();
+    const newId = `entry-${currentTime}-${randomNumber}`;
+
     const randomizedEntry: JournalEntry = {
-      _id: ;
+      _id: newId,
       createdDate: new Date(),
       entryType: EntryType.LONG,
       lastEditedDate: new Date(),
