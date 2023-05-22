@@ -13,7 +13,7 @@ module.exports = {
           '~constants': './src/constants',
           '~redux-reducers': './src/redux-reducers',
           '~redux-store': './src/redux-store',
-          '~redux-reselectors': './src/redux-reselectors',
+          '~redux-selectors': './src/redux-selectors',
           '~redux-actions': './src/redux-actions',
           '~defined-types': './src/defined-types',
         },

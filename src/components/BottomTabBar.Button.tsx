@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, TouchableOpacity} from 'react-native';
+import {Pressable, StyleSheet, TouchableOpacity} from 'react-native';
 import {LIGHT_COLORS} from '~constants/styles';
 
 interface Props {
@@ -10,9 +10,9 @@ interface Props {
 
 const BottomTabBarButton = ({icon, onPress}: Props) => {
   return (
-    <TouchableOpacity style={styles.screenButton} onPress={onPress}>
+    <Pressable style={styles.screenButton} onPress={onPress}>
       {icon}
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 

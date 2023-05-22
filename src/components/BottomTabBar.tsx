@@ -1,14 +1,18 @@
 import {BottomTabBarProps} from '@react-navigation/bottom-tabs';
 import React, {useState} from 'react';
 import {useCallback} from 'react';
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import {Pressable, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import ROUTE_LIST from '~constants/routes';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {LIGHT_COLORS} from '~constants/styles';
 import BottomTabBarButton from './BottomTabBar.Button';
+import {EntryType, JournalEntry} from '~defined-types/journal.type';
+import {useDispatch} from 'react-redux';
+import {updateJournalEntry} from '~redux-actions/journal.action';
 
 const BottomTabBar = (props: BottomTabBarProps) => {
+  const dispatch = useDispatch();
   const {navigation} = props;
 
   const insets = useSafeAreaInsets();
@@ -39,7 +43,25 @@ const BottomTabBar = (props: BottomTabBarProps) => {
     setScreen(ROUTE_LIST.SETTINGS);
   }, [navigation]);
 
-  const onCreateNewJournalEntry = useCallback(() => {}, []);
+  const onCreateNewJournalEntry = useCallback(() => {
+    console.log('onCreateNewJournalEntry');
+
+    const randomNumber = Math.random();
+    const currentTime = new Date().getTime();
+    const newId = `entry-${currentTime}-${randomNumber}`;
+
+    const randomizedEntry: JournalEntry = {
+      _id: newId,
+      createdDate: new Date(),
+      entryType: EntryType.LONG,
+      lastEditedDate: new Date(),
+      text: 'Test',
+      title: 'TestTitle',
+      userId: 'TestUserID',
+    };
+
+    dispatch(updateJournalEntry(randomizedEntry));
+  }, []);
 
   return (
     <View
@@ -77,11 +99,9 @@ const BottomTabBar = (props: BottomTabBarProps) => {
       />
 
       <View style={styles.entryButtonContainer}>
-        <TouchableOpacity
-          style={styles.entryButton}
-          onPress={onCreateNewJournalEntry}>
+        <Pressable style={styles.entryButton} onPress={onCreateNewJournalEntry}>
           <MaterialIcons name={'add'} size={32} color={LIGHT_COLORS.WHITE} />
-        </TouchableOpacity>
+        </Pressable>
       </View>
 
       <BottomTabBarButton
